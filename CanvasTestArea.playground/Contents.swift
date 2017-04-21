@@ -18,17 +18,50 @@ import Cocoa
 import PlaygroundSupport
 
 // Create a new canvas
-let canvas = Canvas(width: 300, height: 500)
+let canvas = Canvas(width: 500, height: 500)
+var axiom = "F++F++F"
+let rule = "F-F++F-F"
+let angle = 60
+var distance = 300
+let iterations = 2
 
 // View the current state of the canvas
 canvas
 
 // Draw the axes
 canvas.drawAxes()
+canvas.translate(byX: 100, byY: 100)
 
 // Add code below...
+if iterations > 0 {
+    for _ in 1...iterations {
+        var newAxiom = ""
+        for char in axiom.characters {
+            newAxiom += char == "F" ? rule : String(char)
+        }
+        axiom = newAxiom
+    }
+}
+iterations
+pow(3,iterations)
 
-
+distance = Int(Double(distance) / (pow(3, iterations) as NSDecimalNumber).doubleValue)
+for char in axiom.characters {
+    switch char {
+    case "F":
+        canvas.drawLine(fromX: 0, fromY: 0, toX: distance, toY: 0)
+        canvas.translate(byX: distance, byY: 0)
+        break
+    case "+":
+        canvas.rotate(by: 60)
+        break
+    case "-":
+        canvas.rotate(by: -60)
+        break
+    default:
+        break
+    }
+}
 /*:
  
  ## To see output
