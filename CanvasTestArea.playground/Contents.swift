@@ -24,6 +24,7 @@ let rule = "F-F++F-F"
 let angle = 60
 var distance = 300
 let iterations = 2
+let reduction = 3
 
 // View the current state of the canvas
 canvas
@@ -45,7 +46,6 @@ if iterations > 0 {
 iterations
 pow(3,iterations)
 
-distance = Int(Double(distance) / (pow(3, iterations) as NSDecimalNumber).doubleValue)
 for char in axiom.characters {
     switch char {
     case "F":
@@ -53,10 +53,10 @@ for char in axiom.characters {
         canvas.translate(byX: distance, byY: 0)
         break
     case "+":
-        canvas.rotate(by: 60)
+        canvas.rotate(by: Degrees(angle))
         break
     case "-":
-        canvas.rotate(by: -60)
+        canvas.rotate(by: -(Degrees)(angle))
         break
     default:
         break
