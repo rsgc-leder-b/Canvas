@@ -39,7 +39,7 @@ public class LindenmayerSystem {
         }
         return tempAxiom
     }
-    public func calculateDistace() -> Int {
+    public func calculateLength() -> Int {
         var reductionFactor = 1
         if iterations > 0 {
             for _ in 1...iterations {

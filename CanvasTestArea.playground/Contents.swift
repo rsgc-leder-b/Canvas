@@ -19,12 +19,6 @@ import PlaygroundSupport
 
 // Create a new canvas
 let canvas = Canvas(width: 500, height: 500)
-var axiom = "F++F++F"
-let rule = "F-F++F-F"
-let angle = 60
-var distance = 300
-let iterations = 2
-let reduction = 3
 
 // View the current state of the canvas
 canvas
@@ -33,20 +27,15 @@ canvas
 canvas.drawAxes()
 canvas.translate(byX: 100, byY: 100)
 
-// Add code below...
-if iterations > 0 {
-    for _ in 1...iterations {
-        var newAxiom = ""
-        for char in axiom.characters {
-            newAxiom += char == "F" ? rule : String(char)
-        }
-        axiom = newAxiom
-    }
-}
-iterations
-pow(3,iterations)
-
-for char in axiom.characters {
+let snowflake = LindenmayerSystem(axiom: "F++F++F",
+                                  rule: "F-F++F-F",
+                                  angle: 60,
+                                  distance: 300,
+                                  iterations: 3 ,
+                                  reduction: 3)
+let angle = 60
+let distance = snowflake.calculateLength()
+for char in snowflake.calculateWord().characters {
     switch char {
     case "F":
         canvas.drawLine(fromX: 0, fromY: 0, toX: distance, toY: 0)
